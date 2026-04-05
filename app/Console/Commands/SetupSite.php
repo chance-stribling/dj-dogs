@@ -7,8 +7,7 @@ use Illuminate\Console\Command;
 class SetupSite extends Command
 {
     protected $signature = 'site:setup
-                            {--fresh : Drop all tables and re-migrate}
-                            {--y|yes : Automatically confirm destructive actions}';
+                            {--fresh : Drop all tables and re-migrate}';
 
     protected $description = 'Run all migrations and seed the site with initial data';
 
@@ -17,21 +16,9 @@ class SetupSite extends Command
         $this->info('Setting up DJ\'s Hot Dog Cart...');
         $this->newLine();
 
-        $autoYes = $this->option('yes');
-
         if ($this->option('fresh')) {
-            // Skip confirmation completely if --y is passed
-            if ($autoYes) {
-                $this->info('Dropping all tables (auto-confirmed)...');
-                $this->call('migrate:fresh');
-            } else {
-                if ($this->confirm('This will drop all tables. Are you sure?', true)) {
-                    $this->call('migrate:fresh');
-                } else {
-                    $this->warn('Skipping fresh migration.');
-                    return;
-                }
-            }
+            $this->info('Dropping all tables...');
+            $this->call('migrate:fresh');
         } else {
             $this->call('migrate');
         }
