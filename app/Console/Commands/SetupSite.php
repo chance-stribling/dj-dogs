@@ -15,7 +15,10 @@ class SetupSite extends Command
         $this->newLine();
 
         if ($this->option('fresh')) {
-            if ($this->confirm('This will drop all tables. Are you sure?')) {
+            // automatically "yes" if --fresh is passed
+            $confirm = $this->option('yes') ?? true;
+
+            if ($confirm || $this->confirm('This will drop all tables. Are you sure?', true)) {
                 $this->call('migrate:fresh');
             } else {
                 $this->warn('Skipping fresh migration.');
