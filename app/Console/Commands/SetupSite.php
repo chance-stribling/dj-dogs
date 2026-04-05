@@ -20,8 +20,6 @@ class SetupSite extends Command
         $autoYes = $this->option('yes');
 
         if ($this->option('fresh')) {
-            $autoYes = $this->option('yes');
-
             // Skip confirmation completely if --y is passed
             if ($autoYes) {
                 $this->info('Dropping all tables (auto-confirmed)...');
