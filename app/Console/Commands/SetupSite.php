@@ -20,12 +20,19 @@ class SetupSite extends Command
         $autoYes = $this->option('yes');
 
         if ($this->option('fresh')) {
-            // Use autoYes to skip confirmation if --y is passed
-            if ($autoYes || $this->confirm('This will drop all tables. Are you sure?', true)) {
+            $autoYes = $this->option('yes');
+
+            // Skip confirmation completely if --y is passed
+            if ($autoYes) {
+                $this->info('Dropping all tables (auto-confirmed)...');
                 $this->call('migrate:fresh');
             } else {
-                $this->warn('Skipping fresh migration.');
-                return;
+                if ($this->confirm('This will drop all tables. Are you sure?', true)) {
+                    $this->call('migrate:fresh');
+                } else {
+                    $this->warn('Skipping fresh migration.');
+                    return;
+                }
             }
         } else {
             $this->call('migrate');
