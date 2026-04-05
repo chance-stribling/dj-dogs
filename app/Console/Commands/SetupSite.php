@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class SetupSite extends Command
 {
-    protected $signature   = 'site:setup {--fresh : Drop all tables and re-migrate}';
+    protected $signature   = 'site:setup {--fresh : Drop all tables and re-migrate} {--y|yes : Automatically confirm destructive actions}';
     protected $description = 'Run all migrations and seed the site with initial data';
 
     public function handle(): void
