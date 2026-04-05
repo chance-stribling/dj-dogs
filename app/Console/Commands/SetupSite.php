@@ -26,9 +26,9 @@ class SetupSite extends Command
         $this->newLine();
 
         // Seed the database
-        $this->call('db:seed', ['--class' => 'MenuItemSeeder']);
-        $this->call('db:seed', ['--class' => 'StandLocationSeeder']);
-        $this->call('db:seed', ['--class' => 'BookingRequestSeeder']);
+        $this->call('db:seed', ['--class' => 'MenuItemSeeder', '--force' => true]);
+        $this->call('db:seed', ['--class' => 'StandLocationSeeder', '--force' => true]);
+        $this->call('db:seed', ['--class' => 'BookingRequestSeeder', '--force' => true]);
 
         $this->newLine();
         $this->info('Clearing caches...');
