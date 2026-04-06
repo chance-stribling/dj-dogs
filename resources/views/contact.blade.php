@@ -10,7 +10,7 @@
     </style>
 </head>
 <body>
-<h2>New Contact Message — DJ's Hot Dog Cart</h2>
+<h2>New Contact Message — Big J's Hot Dog Cart</h2>
 
 <p class="label">Name</p>
 <p class="value">{{ $data['name'] }}</p>

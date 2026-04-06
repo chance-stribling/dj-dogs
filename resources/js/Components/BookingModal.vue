@@ -45,7 +45,7 @@ function submit() {
             <h2 class="text-white font-black uppercase text-5xl leading-tight">Bring The</h2>
             <h2 class="text-brand-primary font-black uppercase text-5xl leading-tight mb-4">Grill To You</h2>
             <p class="text-gray-400 text-base mb-10">
-                Want DJ's Hot Dog Cart at your next event? Fill out the form below and we'll work out the details.
+                Want Big J's Hot Dog Cart at your next event? Fill out the form below and we'll work out the details.
             </p>
 
             <!-- Form -->

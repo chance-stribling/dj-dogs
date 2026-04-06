@@ -120,7 +120,7 @@ onMounted(() => {
                 :class="scrolled ? 'bg-brand-secondary/90 backdrop-blur-sm' : 'bg-brand-secondary'">
             <a href="#landing" class="h-[54px] flex items-center gap-2 text-2xl font-bold">
                 <v-icon icon="mdi-fire" class="text-brand-primary"></v-icon>
-                <span class="text-brand-primary">DJ's Hot Dog Cart</span>
+                <span class="text-brand-primary">Big J's Hot Dog Cart</span>
             </a>
 
             <!-- Desktop Nav -->
@@ -161,7 +161,7 @@ onMounted(() => {
                         Kingsport's Finest Street Dogs
                     </p>
                     <h1 class="text-white font-black uppercase leading-none text-6xl md:text-8xl mb-2">
-                        DJ's
+                        Big J's
                     </h1>
                     <h1 class="text-brand-primary font-black uppercase leading-none text-5xl md:text-7xl mb-8">
                         Hot Dog Cart
@@ -316,7 +316,7 @@ onMounted(() => {
                             <div class="flex flex-col gap-5 text-white/60 text-base leading-relaxed">
                                 <p>
                                     What started as a backyard grill and a big dream in the Sunshine State became
-                                    DJ's Hot Dog Cart — now proudly serving Kingsport, TN. After making the move
+                                    Big J's Hot Dog Cart — now proudly serving Kingsport, TN. After making the move
                                     from Florida, DJ and his mom brought their bold flavors and love for real food
                                     with them, and this corner of East Tennessee has never been the same.
                                 </p>
