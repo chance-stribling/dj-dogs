@@ -155,7 +155,11 @@ onMounted(() => {
         <main class="w-full">
 
             <!-- ── HERO ── -->
-            <section id="landing" class="h-screen scroll-mt-0 pt-24 bg-brand-secondary flex items-center justify-center relative overflow-hidden">
+            <section id="landing" class="h-screen scroll-mt-0 pt-24 bg-[url('/public/img/big-j-logo.jpg')] bg-cover bg-center bg-no-repeat flex items-center justify-center relative overflow-hidden">
+
+                <!-- Dark overlay to keep text readable -->
+                <div class="absolute inset-0 bg-brand-secondary/90 z-0"></div>
+
                 <div class="relative z-10 flex flex-col items-center text-center px-4">
                     <p class="text-brand-primary font-bold tracking-widest text-sm uppercase mb-6">
                         Kingsport's Finest Street Dogs
