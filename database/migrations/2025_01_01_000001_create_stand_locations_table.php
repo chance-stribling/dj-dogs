@@ -10,14 +10,15 @@ return new class extends Migration
     {
         if (!Schema::hasTable('stand_locations')) {
             Schema::create('stand_locations', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('address');
-            $table->string('notes')->nullable();
-            $table->decimal('lat', 10, 7)->nullable();
-            $table->decimal('lng', 10, 7)->nullable();
-            $table->timestamps();
-        });
+                $table->id();
+                $table->string('name');
+                $table->string('address');
+                $table->string('notes')->nullable();
+                $table->decimal('lat', 10, 7)->nullable();
+                $table->decimal('lng', 10, 7)->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     public function down(): void
