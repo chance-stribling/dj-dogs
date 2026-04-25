@@ -12,12 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->decimal('lat', 10, 7);
-            $table->decimal('lng', 10, 7);
-            $table->string('hours')->nullable();
             $table->string('notes')->nullable();
-            $table->date('date');
-            $table->boolean('is_current')->default(false);
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 10, 7)->nullable();
             $table->timestamps();
         });
     }

@@ -3,67 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\StandLocation;
+use App\Services\GeocoderService;
 use Illuminate\Http\Request;
 
 class StandLocationController extends Controller
 {
+    public function __construct(protected GeocoderService $geocoder) {}
+
     public function index()
     {
-        return response()->json([
-            'current'  => StandLocation::current()->first(),
-            'upcoming' => StandLocation::upcoming()->get(),
-        ]);
+        return response()->json(['data' => StandLocation::all()]);
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name'       => 'required|string|max:255',
-            'address'    => 'required|string|max:255',
-            'lat'        => 'required|numeric',
-            'lng'        => 'required|numeric',
-            'hours'      => 'nullable|string|max:255',
-            'notes'      => 'nullable|string|max:255',
-            'date'       => 'required|date',
-            'is_current' => 'boolean',
+        $data = $request->validate([
+            'name'    => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'notes'   => 'nullable|string|max:255',
         ]);
 
-        // Only one location can be current at a time
-        if (!empty($validated['is_current'])) {
-            StandLocation::where('is_current', true)->update(['is_current' => false]);
+        $coords = $this->geocoder->geocode($data['address']);
+        if ($coords) {
+            $data['lat'] = $coords['lat'];
+            $data['lng'] = $coords['lng'];
         }
 
-        return StandLocation::create($validated);
+        return response()->json(['data' => StandLocation::create($data)], 201);
     }
 
     public function update(Request $request, StandLocation $standLocation)
     {
-        $validated = $request->validate([
-            'name'       => 'sometimes|string|max:255',
-            'address'    => 'sometimes|string|max:255',
-            'lat'        => 'sometimes|numeric',
-            'lng'        => 'sometimes|numeric',
-            'hours'      => 'nullable|string|max:255',
-            'notes'      => 'nullable|string|max:255',
-            'date'       => 'sometimes|date',
-            'is_current' => 'sometimes|boolean',
+        $data = $request->validate([
+            'name'    => 'sometimes|string|max:255',
+            'address' => 'sometimes|string|max:255',
+            'notes'   => 'nullable|string|max:255',
         ]);
 
-        if (!empty($validated['is_current'])) {
-            StandLocation::where('is_current', true)
-                ->where('id', '!=', $standLocation->id)
-                ->update(['is_current' => false]);
+        if (isset($data['address']) && $data['address'] !== $standLocation->address) {
+            $coords = $this->geocoder->geocode($data['address']);
+            if ($coords) {
+                $data['lat'] = $coords['lat'];
+                $data['lng'] = $coords['lng'];
+            }
         }
 
-        $standLocation->update($validated);
-
-        return $standLocation;
+        $standLocation->update($data);
+        return response()->json(['data' => $standLocation]);
     }
 
     public function destroy(StandLocation $standLocation)
     {
         $standLocation->delete();
-
         return response()->noContent();
     }
 }

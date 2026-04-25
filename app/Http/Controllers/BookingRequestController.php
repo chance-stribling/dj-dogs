@@ -29,4 +29,37 @@ class BookingRequestController extends Controller
 
         return back()->with('success', 'Booking request sent! We\'ll be in touch soon.');
     }
+
+    public function index()
+    {
+        return response()->json([
+            'data' => BookingRequest::latest()->get(),
+        ]);
+    }
+
+    public function markRead(BookingRequest $bookingRequest)
+    {
+        $bookingRequest->update(['read' => true]);
+        return response()->json(['data' => $bookingRequest]);
+    }
+
+    public function updateStatus(BookingRequest $bookingRequest, Request $request)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,approved,declined',
+        ]);
+        $bookingRequest->update(['status' => $request->status]);
+        return response()->json(['data' => $bookingRequest]);
+    }
+
+    public function destroy(BookingRequest $bookingRequest)
+    {
+        $bookingRequest->delete();
+        return response()->noContent();
+    }
+
+    public function count()
+    {
+        return response()->json(['total' => BookingRequest::count()]);
+    }
 }

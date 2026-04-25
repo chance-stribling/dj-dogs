@@ -26,7 +26,17 @@ class ContactMessageController extends Controller
 
     public function index()
     {
-        return ContactMessage::latest()->paginate(20);
+        return response()->json([
+            'data' => ContactMessage::latest()->get(),
+        ]);
+    }
+    public function count()
+    {
+        $total = ContactMessage::count();
+
+        return response()->json([
+            'total' => $total
+        ]);
     }
 
     public function markRead(ContactMessage $contactMessage)

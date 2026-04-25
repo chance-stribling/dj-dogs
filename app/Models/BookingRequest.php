@@ -16,10 +16,11 @@ class BookingRequest extends Model
         'location',
         'details',
         'read',
+        'status',
     ];
 
     protected $casts = [
-        'event_date'      => 'date',
+        'event_date'      => 'date:Y-m-d',
         'expected_guests' => 'integer',
         'read'            => 'boolean',
     ];

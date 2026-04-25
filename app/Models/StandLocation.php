@@ -6,33 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class StandLocation extends Model
 {
-    protected $fillable = [
-        'name',
-        'address',
-        'lat',
-        'lng',
-        'hours',
-        'notes',
-        'date',
-        'is_current',
-    ];
+    protected $fillable = ['name', 'address', 'notes', 'lat', 'lng'];
 
     protected $casts = [
-        'lat'        => 'float',
-        'lng'        => 'float',
-        'date'       => 'date',
-        'is_current' => 'boolean',
+        'lat' => 'float',
+        'lng' => 'float',
     ];
-
-    public function scopeCurrent($query)
+    public function schedules()
     {
-        return $query->where('is_current', true);
-    }
-
-    public function scopeUpcoming($query)
-    {
-        return $query->where('is_current', false)
-            ->where('date', '>=', now()->toDateString())
-            ->orderBy('date');
+        return $this->hasMany(StandLocationSchedule::class);
     }
 }

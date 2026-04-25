@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BookingRequest;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,8 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            MenuItemSeeder::class,
-            StandLocationSeeder::class,
+            ContactMessageSeeder::class,
+            BookingRequestSeeder::class,
         ]);
     }
 }
