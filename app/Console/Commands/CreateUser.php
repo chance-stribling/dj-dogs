@@ -37,6 +37,7 @@ class CreateUser extends Command
             ['Name',  $user->name],
             ['Email', $user->email],
             ['Password', $password],
+
         ]);
 
         return Command::SUCCESS;
